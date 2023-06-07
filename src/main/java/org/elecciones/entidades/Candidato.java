@@ -4,10 +4,6 @@ public class Candidato extends Ciudadano {
     private int numeroLista;
     final static int MAX_NUMERO_LISTA = 50;
 
-    /*public Candidato(String nombre, String dni, int numeroLista) {
-        super(nombre, dni, sobre);
-        this.numeroLista = numeroLista;
-    }*/
 
 
     public Candidato(String nombre, String dni, int numeroLista) {

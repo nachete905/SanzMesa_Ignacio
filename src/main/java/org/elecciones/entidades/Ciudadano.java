@@ -47,7 +47,11 @@ public class Ciudadano implements ValidarDNI {
     }
 
     public void setDni(String dni) {
+        Pattern dniValido = Pattern.compile("[0-9]{8}[A-Z]{1}");
         this.dni = dni;
+
+
+
     }
 
     public Sobre getSobre() {
@@ -60,13 +64,10 @@ public class Ciudadano implements ValidarDNI {
 
     @Override
     public boolean validarDNI(String dni) {
-        List<Integer> numeros = new LinkedList<>();
-        int logitud = 9;
-        if (dni.length() > 9)
-        for (int i = 0; i < 10; i++){
-            numeros.add(i);
-        }
 
+        if(dni.length() > 9){
+            this.dni = "";
+        }
 
         return false;
     }

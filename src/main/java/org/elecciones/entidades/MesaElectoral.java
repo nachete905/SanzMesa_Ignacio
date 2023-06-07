@@ -28,10 +28,8 @@ public class MesaElectoral implements AccionesMesaElectoral, FicheroCiudadanos {
 
     public MesaElectoral() {
         this.direccion = "";
-        this.componentes = new Ciudadano[NUM_COMPONENTES];
-        for (int i = 0; i < componentes.length; i++) {
-            componentes[i] = new Ciudadano();
-        }
+
+
 
 
     }
@@ -58,6 +56,9 @@ public class MesaElectoral implements AccionesMesaElectoral, FicheroCiudadanos {
     }
 
     public void setComponentes(Ciudadano[] componentes) {
+        for (int i = 0; i < componentes.length; i++) {
+            componentes[i] = new Ciudadano();
+        }
         if (componentes == null) {
             System.err.println("No puede ser nulo");
         } else {
@@ -163,28 +164,40 @@ public class MesaElectoral implements AccionesMesaElectoral, FicheroCiudadanos {
     }
 
 
-    /*
-    En leerCiudadanos para que funcionase correctamente habría que crearse el objeto FileReader y pasarle
-    la variable del nombre del fichero, dentro de un try catch haríamos un inputStream para leer el fichero
-    y luego una variable para poder leer el nombre del fichero
-     */
+
     @Override
     public List<Ciudadano> leerCiudadanos(String nombreFichero) {
+        List<Ciudadano> ciudadanos = new ArrayList<>();
+
         try {
             FileReader fr = new FileReader(nombreFichero);
-            InputStream nombre = new FileInputStream(nombreFichero);
-            int valor = nombre.read();
+            BufferedReader br = new BufferedReader(fr);
 
+            String linea;
+            while ((linea = br.readLine()) != null){
+                System.out.println(linea);
+            }
+            br.close();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         return null;
     }
 
     @Override
     public void guardarCiudadanos(String nombreFichero, List<Ciudadano> ciudadanos) {
-
+        try {
+            FileWriter fw = new FileWriter(nombreFichero);
+            for (Ciudadano ciudadano: ciudadanos) {
+                String linea = ciudadano.getNombre();
+                fw.write(linea + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

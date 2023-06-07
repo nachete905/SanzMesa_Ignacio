@@ -16,8 +16,12 @@ public interface FicheroCiudadanos {
 
     /**
      * Guarda los ciudadanos en el fichero dado
+     *
      * @param nombreFichero
      * @param ciudadanos
      */
-    void guardarCiudadanos(String nombreFichero, List<Ciudadano> ciudadanos);
+    default void guardarCiudadanos(String nombreFichero, List<Ciudadano> ciudadanos) {
+
+
+    }
 }

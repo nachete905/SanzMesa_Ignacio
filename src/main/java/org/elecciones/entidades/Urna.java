@@ -43,30 +43,22 @@ public class Urna implements AccionesUrna {
 
     @Override
     public int getVotos(Papeleta papeleta) {
+        return votos.getOrDefault(papeleta, 0);
 
-        return 0;
+
     }
+
 
     @Override
     public void contabilizarVoto(Papeleta papeleta) {
-        int contador = 0;
-        int index = -1;
-        for (int i = 0; i < votos.size(); i++){
-            if (index == 0){
-                System.out.println("No hay votos");
-            }else if (index != 0){
-                votos.get(papeleta);
-                contador++;
-            }
-        }
+
+
     }
 
     @Override
     public String obtenerResultados() {
-        int indice = -1;
-        for (int i = 0; i < votos.size(); i++){
-            votos.get(votos);
-        }
+        votos.get(getVotos());
+
         return null;
     }
 }

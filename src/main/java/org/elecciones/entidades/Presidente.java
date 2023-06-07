@@ -24,7 +24,9 @@ public class Presidente extends Ciudadano implements AccionesPresidente {
 
     @Override
     public Sobre comprobarCiudadano(Ciudadano ciudadano, MesaElectoral mesa) {
-
+        if (mesa.getCiudadanosQueHanVotado().contains(ciudadano)){
+            System.out.println("Este ciudadano ya ha votado");
+        }
         return null;
     }
 
