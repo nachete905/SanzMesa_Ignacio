@@ -167,35 +167,38 @@ public class MesaElectoral implements AccionesMesaElectoral, FicheroCiudadanos {
 
     @Override
     public List<Ciudadano> leerCiudadanos(String nombreFichero) {
-        List<Ciudadano> ciudadanos = new ArrayList<>();
-
-        try {
-            FileReader fr = new FileReader(nombreFichero);
-            BufferedReader br = new BufferedReader(fr);
-
+        ArrayList<Ciudadano> ciudadanos = new ArrayList<>();
+         try (
+            BufferedReader br = new BufferedReader( new FileReader(nombreFichero))){
             String linea;
             while ((linea = br.readLine()) != null){
-                System.out.println(linea);
+                String [] campos = linea.split(";");
+                String nombre = campos[0];
+                String dni = campos[1];
+                Ciudadano ciudadano = new Ciudadano(nombre, dni);
+                ciudadanos.add(ciudadano);
             }
-            br.close();
+
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+             System.err.println("Fichero no existe");
+             return  new ArrayList<>();//en caso de que no se encuentre una lista devuelve una vacia
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        return null;
+        return ciudadanos;
     }
 
     @Override
     public void guardarCiudadanos(String nombreFichero, List<Ciudadano> ciudadanos) {
-        try {
-            FileWriter fw = new FileWriter(nombreFichero);
+        try (
+            BufferedWriter bw = new BufferedWriter( new FileWriter(nombreFichero))){
             for (Ciudadano ciudadano: ciudadanos) {
-                String linea = ciudadano.getNombre();
-                fw.write(linea + "\n");
+                String linea = ciudadano.getNombre() +";"+ ciudadano.getDni();;//se obtiene el nombre de los ciudadanos
+
+               bw.write(linea);//salto de linea
+                bw.newLine();
             }
-            fw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
